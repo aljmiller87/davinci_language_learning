@@ -25,6 +25,9 @@
     "express": "^4.14.1",
     "http-proxy-middleware": "^0.17.3",
     "npm-run-all": "^4.0.1",
+    "passport": "^0.3.2",
+    "passport-google-oauth20": "^1.0.0",
+    "passport-http-bearer": "^1.0.1",
     "xp": "^1.0.1"
   }
 }
