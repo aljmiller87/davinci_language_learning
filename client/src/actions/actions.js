@@ -47,9 +47,7 @@ export const firstQuestion = (response) => ({
 })
 
 export const asyncNextQuestion = (answer) => (dispatch) => {
-	console.log('answer', answer)
 	const accessToken = Cookies.get('accessToken')
-	// console.log('accessToken', accessToken);
 		fetch(`/api/nextquestion/:${answer}`, {
 			method: 'POST',
 			headers: {
@@ -67,10 +65,8 @@ export const asyncNextQuestion = (answer) => (dispatch) => {
 				}
 				throw new Error(res.statusText);
 			}
-			// console.log("First Question?", res.json());
 			return res.json();
 		}).then(_res => {
-			console.log("_res", _res)
 			let newQuestion = {}
 			return dispatch(nextQuestion(_res));
 		}).catch(error => {
@@ -86,7 +82,6 @@ export const nextQuestion = (response) => ({
 
 export const asyncStartQuiz = () => dispatch => {
 	const accessToken = Cookies.get('accessToken')
-	console.log("AccessToken found?", accessToken);
 	fetch('/api/loadspanishquestions', {
 		method: 'POST',
 		headers: {
