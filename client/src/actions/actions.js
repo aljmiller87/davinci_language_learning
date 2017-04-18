@@ -17,7 +17,6 @@ export const instructionsActive = () => ({
 
 export const asyncFirstQuestion = () => (dispatch) => {
 	const accessToken = Cookies.get('accessToken')
-	// console.log('accessToken', accessToken);
 		fetch('/api/firstquestion', {
 			headers: {
 				'Authorization': `Bearer ${accessToken}`}
@@ -31,10 +30,8 @@ export const asyncFirstQuestion = () => (dispatch) => {
 				}
 				throw new Error(res.statusText);
 			}
-			// console.log("First Question?", res.json());
 			return res.json();
 		}).then(_res => {
-			console.log("_res", _res)
 			let newQuestion = {}
 			return dispatch(firstQuestion(_res));
 		}).catch(error => {
@@ -50,9 +47,7 @@ export const firstQuestion = (response) => ({
 })
 
 export const asyncNextQuestion = (answer) => (dispatch) => {
-	console.log('answer', answer)
 	const accessToken = Cookies.get('accessToken')
-	// console.log('accessToken', accessToken);
 		fetch(`/api/nextquestion/:${answer}`, {
 			method: 'POST',
 			headers: {
@@ -70,10 +65,8 @@ export const asyncNextQuestion = (answer) => (dispatch) => {
 				}
 				throw new Error(res.statusText);
 			}
-			// console.log("First Question?", res.json());
 			return res.json();
 		}).then(_res => {
-			console.log("_res", _res)
 			let newQuestion = {}
 			return dispatch(nextQuestion(_res));
 		}).catch(error => {
@@ -89,7 +82,6 @@ export const nextQuestion = (response) => ({
 
 export const asyncStartQuiz = () => dispatch => {
 	const accessToken = Cookies.get('accessToken')
-	console.log("AccessToken found?", accessToken);
 	fetch('/api/loadspanishquestions', {
 		method: 'POST',
 		headers: {
@@ -104,11 +96,9 @@ export const asyncStartQuiz = () => dispatch => {
 			}
 			throw new Error(res.statusText);
 		}
-    	console.log("res?", res);
     	return res.json(); 
   	})
   	.then(_res => {
-  		console.log("What is _res?", _res);
   		// dispatch(startQuiz(_res))
   	})
   	.catch(error => {
