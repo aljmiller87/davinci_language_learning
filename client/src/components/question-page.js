@@ -58,7 +58,6 @@ export class QuestionPage extends React.Component {
       
         let options = (this.props.options[0]) ? this.props.options[0] : [];
         let newQuiz = (this.props.options[0]) ? false : true;
-        console.log("is this a new quiz?", newQuiz);
 
         return (
 
