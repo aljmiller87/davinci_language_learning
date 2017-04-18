@@ -12,12 +12,14 @@ const initialState = {
 
 export function mainReducer (state = initialState, action) {
 	if (action.type === 'QUIZ_ACTIVE') {
+		setTimeout(()=> { console.log(store.getState(), "GETSTATE")}, 2000);
 		return update(state, {
 			instructions: {$set: false}
 		})
 	}
 
 	if (action.type === 'INSTRUCTIONS_ACTIVE') {
+		setTimeout(()=> { console.log(store.getState(), "GETSTATE")}, 2000);
 		return update(state, {
 			instructions: {$set: true}
 		})
@@ -29,6 +31,7 @@ export function mainReducer (state = initialState, action) {
 		let updatedQuestionCount = action.response.questionCount;
 		let updatedCorrectCount = action.response.correctCount;
 
+		setTimeout(()=> { console.log(store.getState(), "GETSTATE")}, 2000);
 		return update(state, {
 			question: {$set: currentQuestion},
 			options: {$set: [currentOptions]},
@@ -42,6 +45,9 @@ export function mainReducer (state = initialState, action) {
 		let currentOptions = action.response.nextQuestion.options;
 		let updatedQuestionCount = action.response.questionCount;
 		let updatedCorrectCount = action.response.correctCount;
+		console.log('next question updated?', currentQuestion);
+		console.log('options updated?', currentOptions);
+		setTimeout(()=> { console.log(store.getState(), "GETSTATE")}, 2000);
 		return update(state, {
 			question: {$set: currentQuestion},
 			options: {$set: [currentOptions]},
