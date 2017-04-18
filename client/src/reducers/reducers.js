@@ -42,6 +42,7 @@ export function mainReducer (state = initialState, action) {
 		let currentQuestion = action.response.nextQuestion.question;
 		let currentOptions = action.response.nextQuestion.options;
 		let updatedQuestionCount = action.response.questionCount;
+		let updatedCorrectCount = action.response.correctCount;
 		return update(state, {
 			question: {$set: currentQuestion},
 			options: {$set: [currentOptions]},
