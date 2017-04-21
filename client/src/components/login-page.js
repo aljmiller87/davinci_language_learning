@@ -14,13 +14,13 @@ export default function LoginPage() {
 			    	<div className="login-wrapper">
 			    		<h1 className="login"> Welcome!</h1>
 			    		<h3>Please log in with Google.</h3>
-			    		<a href="/api/auth/google" className="btn-green btn">Log In</a>
+			    		<a href="/api/auth/google" className="btn-green btn button">Log In</a>
 			    	</div>
 			    </div>
 			</div>
 		    <div className="footer lgn">
 		        <div className="register">
-		        Don't have a Google account?<a href="" className="btn btn-black">Register</a>
+		        Don't have a Google account?<a href="" className="btn btn-black button">Register</a>
 		        </div>
 		    </div>
 	    </div>

@@ -118,6 +118,7 @@ app.get('/api/questions',
 app.post('/api/loadspanishquestions', passport.authenticate('bearer', {session: false}), (req, res) => {
     let cookie = req.user._conditions.accessToken;
     Questions.find({})
+    .limit(9)
     .exec()
     .then(questions => {
         console.log("Questions", questions);
@@ -148,7 +149,7 @@ app.get('/api/firstquestion', passport.authenticate('bearer', {session: false}),
                 correctCount: user.correctCount,
                 questionCount: user.questionCount
             }
-            // console.log("currentQuestion", currentQuestion);
+            console.log("response to firstquestion", response);
             res.json(response);
         })
         .catch(err => {
@@ -170,9 +171,6 @@ app.post('/api/nextquestion/:answer', passport.authenticate('bearer', {session: 
         // console.log("user on backend", user);
         user.questionCount++;
         let currentQuestion = user.questionsArray[0];
-        console.log("answer given typeof ", typeof(answerGiven));
-        console.log("correct answer type of", typeof(currentQuestion.answer));
-        console.log("boolean test", (answerGiven !== currentQuestion.answer));
 
         // Algorithm
 
@@ -193,52 +191,54 @@ app.post('/api/nextquestion/:answer', passport.authenticate('bearer', {session: 
         user.questionsArray.splice(currentQuestion.m, 0, currentQuestion);
         // console.log("user.questionsArray should update", user.questionsArray);
 
-        user.save(function(err) {
-            if (err) {
-                throw err;
-            } else {
-                res.status(202).json({correctCount: user.correctCount, questionCount:
-                user.questionCount, nextQuestion: user.questionsArray[0]});
+        let readyToLevelUp = true;
+        for (let i = 0; i < user.questionsArray.length; i++) {
+            let question = user.questionsArray[i];
+            if (question.m < 4) {
+                console.log(`m below 4 on question ${i + 1}`);
+                readyToLevelUp = false;
             }
-        })
 
+        }
 
+        if (readyToLevelUp === false) {
+            user.save(function(err) {
+                if (err) {
+                    throw err;
+                } else {
+                    console.log("Testing Save")
+                    res.status(202).json({correctCount: user.correctCount, questionCount:
+                    user.questionCount, nextQuestion: user.questionsArray[0], levelUp: false});
+                }
+            })           
+        } else {
+            Questions.find({})
+                .skip(9)
+                .limit(9)
+                .exec()
+                .then(newQuestions => {
+                    let nextquestions = newQuestions;
+                    let originalQuestions = user.questionsArray;
+                    console.log('still see user questions?', user.questionsArray);
+                    user.questionsArray = [...nextquestions, ...originalQuestions];
+                    console.log('does user.questionsArray now have 20?', user.questionsArray);
+                })
+                .then(_res => {
+                    user.save(function(err) {
+                        if (err) {
+                            throw err;
+                        } else {
+                            console.log("Testing Save at the bottom")
+                            res.status(202).json({correctCount: user.correctCount, questionCount:
+                            user.questionCount, nextQuestion: user.questionsArray[0], levelUp: true});
+                        }
+                    })
+                })
+        }
 
-        // console.log("user.questionsArray should be different ", newQArray);
-        // let questionsArray = user.questionsArray;
-        // let currentQuestion = questionsArray[0];
-        // console.log("questionsArray[0]", currentQuestion);
-        // console.log("M value visible?", currentQuestion.m);
-        // console.log("still see answer? ", answer);
-
-        // // Algorithm
-
-        // if (answer !== currentQuestion.answer) {
-        //     console.log('wrong answer');
-        //     if(currentQuestion.m > 1) {
-        //         currentQuestion.m = Math.floor(currentQuestion.m / 2);
-        //     }
-        // } else {
-        //     console.log('correct answer');
-        //     // correctCount++;
-        //     currentQuestion.m = currentQuestion.m * 2;
-        //     if (currentQuestion.m > questionsArray.length) {
-        //         currentQuestion.m = questionsArray.length - 1;
-        //     }
-        // }
-        // questionsArray.splice(0, 1);
-        // console.log("questionsArray[0] should update", questionsArray[0])
-        // console.log('currentQuestion.m', currentQuestion.m);
-        // questionsArray.splice(currentQuestion.m, 0, currentQuestion);
-        // // console.log("questionsArray should be different ", newQArray);
-
-        // return questionsArray;
+      
     })
-    // .then(_res => {
 
-    //     console.log("did Q array return? ", _res);
-    //     res.status(202).json(_res[0]);
-    // })
     .catch(err => {
                 console.log(err);
     }) 

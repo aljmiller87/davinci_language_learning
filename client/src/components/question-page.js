@@ -2,6 +2,9 @@ import React from 'react';
 import * as Cookies from 'js-cookie';
 import * as actions from '../actions/actions';
 import {connect} from 'react-redux';
+const ReactToastr = require("react-toastr");
+const {ToastContainer} = ReactToastr;
+const ToastMessageFactory = React.createFactory(ReactToastr.ToastMessage.animation);
 
 export class QuestionPage extends React.Component {
     constructor(props) {
@@ -13,10 +16,14 @@ export class QuestionPage extends React.Component {
 
         this.componentDidMount = this.componentDidMount.bind(this);
         this.logOff = this.logOff.bind(this);
-        this.startQuiz = this.startQuiz.bind(this);
+        this.startSpanishQuiz = this.startSpanishQuiz.bind(this);
         this.firstQuestion = this.firstQuestion.bind(this);
         this.submitAnswer = this.submitAnswer.bind(this);
         this.readInstructions = this.readInstructions.bind(this);
+        this.correctPopUp = this.correctPopUp.bind(this);
+        this.incorrectPopUp = this.incorrectPopUp.bind(this);
+        this.levelOne = this.levelOne.bind(this);
+        this.levelUpdate = this.levelUpdate.bind(this);
     }
 
 
@@ -31,7 +38,7 @@ export class QuestionPage extends React.Component {
         })
     }
 
-    startQuiz(event) {
+    startSpanishQuiz(event) {
         event.preventDefault();
         this.props.dispatch(actions.quizActive());
         this.props.dispatch(actions.asyncStartQuiz())
@@ -39,6 +46,7 @@ export class QuestionPage extends React.Component {
 
     firstQuestion() {
         this.props.dispatch(actions.asyncFirstQuestion());
+        this.levelOne();
     }
 
     readInstructions(event) {
@@ -47,17 +55,56 @@ export class QuestionPage extends React.Component {
     }
 
     submitAnswer(id) {
-        const clickedItem = document.getElementById(id);
-        const selectedAnswer = clickedItem.getAttribute("value");
+        let clickedItem = document.getElementById(id);
+        let selectedAnswer = clickedItem.getAttribute("value");
+        if (selectedAnswer == this.props.answer) {
+            this.correctPopUp();
+        } else {
+            this.incorrectPopUp();
+        }
         this.props.dispatch(actions.asyncNextQuestion(selectedAnswer));
     }
 
+    correctPopUp () {
+        this.refs.container.success(
+            "Keep up the great work!",
+            "Great Job!", {
+                timeOut: 700
+        });
+    }
 
+    incorrectPopUp () {
+        this.refs.container.error(
+            "You'll get it next time!",
+            "Not quite!", {
+                timeOut: 700
+            });
+    }
     
+    levelOne () {
+        this.refs.container.info(
+            "Goodluck",
+            "Level One!", {
+                timeOut: 3000
+            });
+    }
+
+    levelUpdate() {
+        this.refs.container.info(
+            "Congratulations",
+            "Next Level!", {
+                timeOut: 3000
+            });
+    }
+
     render() {
       
         let options = (this.props.options[0]) ? this.props.options[0] : [];
         let newQuiz = (this.props.options[0]) ? false : true;
+
+        if (this.props.levelUp === true) {
+            this.levelUpdate();
+        }
 
         return (
 
@@ -76,11 +123,15 @@ export class QuestionPage extends React.Component {
                     <div className="nav">
                         <ul>
                             <li><a onClick={this.readInstructions} href="">Instructions</a></li>
-                            <li className="dropdown"><a className="dropbtn" href="">Select Language</a>
+                            <li className="dropdown"><span className="dropbtn">Select Language</span>
                                 <div className="dropdown-content">
-                                    <a onClick={this.startQuiz} href="">Spanish</a>
-                                    <a href=""><p p className="deactive">Italian</p></a>
-                                    <a href=""><p className="deactive">Portuguese</p></a>
+                                    <a onClick={this.startSpanishQuiz} href="">Spanish</a>
+                                    <a href="" className="disabled">Italian
+                                        <p>Coming Soon!</p>
+                                    </a>
+                                    <a href="" className="disabled">Portuguese
+                                        <p>Coming Soon!</p>
+                                    </a>
                                 </div>
                             </li>
                         </ul>
@@ -103,10 +154,14 @@ export class QuestionPage extends React.Component {
                             <li value="3" id="3" onClick={() => this.submitAnswer("3")}>{options[2]}</li>
                         </ul>
                         <h2>Answered {this.props.correctCount} out of {this.props.questionCount}.</h2>
+                        <div>
+                            <ToastContainer ref="container" toastMessageFactory={ToastMessageFactory}  />
+                        </div>
                     </div>
                 </div>
             </div>
-            
+
+                
             <div className="footer">
                 <div className="logout">
                     <a href="/api/auth/logout" className="btn btn-black">Log Out</a>
@@ -124,9 +179,11 @@ function mapStateToProps (state, props) {
     return {
         question:state.question,
         options:state.options,
+        answer:state.answer,
         questionCount: state.questionCount,
         correctCount: state.correctCount,
-        instructions: state.instructions
+        instructions: state.instructions,
+        levelUp: state.levelUp
     }
 
 }
