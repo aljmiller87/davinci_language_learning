@@ -19,8 +19,7 @@ body {
 	left: 90px;
 	display: inline-block;
 	transform: translateY(-10%); 
-/*	vertical-align: middle;
-*/}
+}
 
 .circle {
 	display: inline-block;
@@ -43,48 +42,46 @@ body {
 
 }
 
+.main:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  display: block;
+  background-image: url('http://images.photo-visible.com/photo_public/2011/4/800/800_640.jpg');
+  background-size: 100% 100%;
+  width: 100%;
+  height: 440px;
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
+}
+
 .main {
-	display: block;
-	height: 440px;
-	width: 100%;
-	background-image: url("http://images.photo-visible.com/photo_public/2011/4/800/800_640.jpg");
-	background-size: 100% 100%;
-	background-repeat: none;
-	filter: blur(2px);
-	-webkit-filter: blur(2px);
-	z-index: 1;
-
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  height: 440px;
 }
-
-.main img {
-	position: relative;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	filter: brightness(110%);
-	filter: blur(2px);
-}
-
 .content-container {
-	position: relative;
-	width: 80%;
-	max-width: 450px;
-	margin: 0 auto;
-	height: 500px;
-	bottom: 600px;
-}
-
-.login-container {
 	color: #38302D;
 	font-family: 'Lato', Helvetica, sans-serif;
 	text-align: center;
-	margin-top: 230px;
-	height: 240px;
+	margin: 0 auto;
+	margin-top: 15%;
+	min-height: 270px;
+	max-height: 320px;
+	width: 85%;
+}
+
+.login-container {
+	padding: 15px 15px 25px 15px;
+	margin-top: 34%;
 	background-color: white;
-	padding: 15px;
-	border: 1px solid #EEEEEE;
-	border-radius: 1px;
-	filter: blur(0px);
 }
 
 .login-wrapper h3 {
@@ -93,25 +90,16 @@ body {
 }
 
 .login {
-	font-family: 'Lato', Helvetica, sans-serif;
 	font-weight: 300;
 	font-size: 36px;
 	color: #333333;
-	text-align: center;
 	padding-bottom: 25px;
 	border-bottom: 1px solid #e5e5e5;
 }
 
 .question-container {
-	color: #38302D;
-	font-family: 'Lato', Helvetica, sans-serif;
-	text-align: center;
-	margin: 0 auto;
-	margin-top: 200px;
-	height: 340px;
 	width: 100%;
-/*	max-width: 450px;
-*/	background-color: white;
+	background-color: white;
 	padding: 0 0 15px 0;
 	border-radius: 3px;
 }
@@ -243,17 +231,14 @@ li.dropdown {
 }
 
 .footer {
-	position: relative;
-	bottom: 690px;
+	position: absolute;
+	top: 517px;
 	height: 50px;
 	margin-top: 15px;
 	font-family: "PT Sans", Arial, Helvetica, sans-serif;
-	width: 92%;
+	width: 95%;
 	margin: 0 auto;
-}
-
-.lgn {
-	bottom: 715px !important;
+	padding: 10px;
 }
 
 .fade-in {
@@ -304,10 +289,10 @@ li.dropdown {
 	padding: 15px !important;
 }
 
-.register {
+/*.register {
 	width: 340px;
 	margin: 0 auto;
-}
+}*/
 
 .logout {
 	width: 95px;
@@ -319,24 +304,28 @@ li.dropdown {
 }
 
 @media only screen and (min-width: 374px) {
-	.main {
+	.main:before {
 		height: 500px;
 	}
 
 	.content-container {
-		bottom: 660px;
+		width: 80%;
+		height: 50%;
+		margin-top: 110px;
 	}
 
-	.question-container{
-		height: 400px;
-	}
-
-	.instructions {
-		height: 308px;
+	.question-container {
+		margin-top: -70px;
+		height: 380px;
 	}
 
 	.footer {
-		width:80%;
+		top: 590px;
+	}
+
+	.register {
+		width: 300px;
+		margin: 0 auto;
 	}
 }
 
@@ -344,6 +333,19 @@ li.dropdown {
 	.header h1 {
 		font-size: 170%;
 		margin-top: 13px;
+	}
+
+	.login-container {
+		margin-top: 0px;
+	}
+
+	.content-container {
+		width: 75%;
+		padding: 20px;
+	}
+
+	.question-container {
+		height: 340px;
 	}
 }
 
@@ -359,6 +361,40 @@ li.dropdown {
 	.instructions {
 		overflow: initial;
 	}
+
+	.login-container {
+		margin-top: 0px;
+	}
+
+	.question-container {
+		margin-top: -70px;
+		height: 340px;
+	}
+}
+
+@media only screen and (min-width: 760px) {
+	.main {
+		height: 750px;
+	}
+
+	.main:before {
+		height: 750px;
+	}
+
+	.content-container {
+		font-size: 115%;
+		width: 60%;
+		height: 60%;
+		margin-top: 190px
+	}
+
+	.question-container {
+		height: 130%;
+	}
+
+	.footer {
+		top: 850px;
+	}
 }
 
 @media only screen and (min-width: 800px) {
@@ -367,21 +403,21 @@ li.dropdown {
 }
 
 	.main {
-		height: 600px;
+		height: 700px;
 	}
 
-	.login-container {
-		margin-top: 200px;
+	.main:before {
+		height: 700px;
 	}
 
 	.content-container {
-		bottom: 630px;
+		max-width: 500px;
+		margin-top: 160px;
 	}
 
 	.question-container {
-		margin-top: 100px;
-/*		width: 50%;
-*/	}
+
+	}
 
 /*	li a, .dropbtn {
 	    padding: 14px 16px;
@@ -409,8 +445,12 @@ li.dropdown {
 	}
 
 	.footer {
-		bottom: 585px;
-		font-size: 115%
+		font-size: 115%;
+		top: 800px;
+	}
+
+	.register {
+		width: 330px;
 	}
 
 	.lgn {

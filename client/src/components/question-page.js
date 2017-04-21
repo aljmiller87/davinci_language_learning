@@ -114,54 +114,51 @@ export class QuestionPage extends React.Component {
                 <div className="dark circle"></div>
                 <h1>DaVinci Language Learning</h1>
             </div>
-            <div className="main"></div>
-                
-
-            <div className="content-container">
-
-                <div className="question-container">
-                    <div className="nav">
-                        <ul>
-                            <li><a onClick={this.readInstructions} href="">Instructions</a></li>
-                            <li className="dropdown"><span className="dropbtn">Select Language</span>
-                                <div className="dropdown-content">
-                                    <a onClick={this.startSpanishQuiz} href="">Spanish</a>
-                                    <a href="" className="disabled">Italian
-                                        <p>Coming Soon!</p>
-                                    </a>
-                                    <a href="" className="disabled">Portuguese
-                                        <p>Coming Soon!</p>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className={this.props.instructions === true ? "instructions" : "hidden"}>
-                        <h3>Instructions</h3>
-                        <p>To get started, hover over the 'Select Language' tab above. Choose from the available languages on the dropdown.</p>
-                        <p>Once you select the language to study, the first question will automatically load on your screen. You will be presented with a word or phrase in English and asked to select the correct translation out of three possible options given. To select an answer, simply click directly on top of the choice. There will be a green highlighter that appears when you hover over any option.</p>
-                        <p>All progress is automatically saved. To continue progress upon return, simply select the same language lesson and your current progress will appear.</p>
-                    </div>
-                    <div className={(this.props.instructions === false && newQuiz === true) ? "question-details" : "hidden"}>
-                        <div onClick={this.firstQuestion} className="btn-green btn large fade-in">Start Quiz</div>
-                    </div>
-                    <div className={(this.props.instructions === false && newQuiz === false) ? "question-details" : "hidden"}>
-                        <h3>Current Question:</h3>
-                        <h3 className="question">{this.props.question}</h3>
-                        <ul className="option-list"> 
-                            <li value="1" id="1" onClick={() => this.submitAnswer("1")}>{options[0]}</li>
-                            <li value="2" id="2" onClick={() => this.submitAnswer("2")}>{options[1]}</li>                
-                            <li value="3" id="3" onClick={() => this.submitAnswer("3")}>{options[2]}</li>
-                        </ul>
-                        <h2>Answered {this.props.correctCount} out of {this.props.questionCount}.</h2>
-                        <div>
-                            <ToastContainer ref="container" toastMessageFactory={ToastMessageFactory}  />
+            <div className="main">
+                <div className="content-container">
+                    <div className="question-container">
+                        <div className="nav">
+                            <ul>
+                                <li><a onClick={this.readInstructions} href="">Instructions</a></li>
+                                <li className="dropdown"><span className="dropbtn">Select Language</span>
+                                    <div className="dropdown-content">
+                                        <a onClick={this.startSpanishQuiz} href="">Spanish</a>
+                                        <a href="" className="disabled">Italian
+                                            <p>Coming Soon!</p>
+                                        </a>
+                                        <a href="" className="disabled">Portuguese
+                                            <p>Coming Soon!</p>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className={this.props.instructions === true ? "instructions" : "hidden"}>
+                            <h3>Instructions</h3>
+                            <p>To get started, hover over the 'Select Language' tab above. Choose from the available languages on the dropdown.</p>
+                            <p>Once you select the language to study, the first question will automatically load on your screen. You will be presented with a word or phrase in English and asked to select the correct translation out of three possible options given. To select an answer, simply click directly on top of the choice. There will be a green highlighter that appears when you hover over any option.</p>
+                            <p>All progress is automatically saved. To continue progress upon return, simply select the same language lesson and your current progress will appear.</p>
+                        </div>
+                        <div className={(this.props.instructions === false && newQuiz === true) ? "question-details" : "hidden"}>
+                            <div onClick={this.firstQuestion} className="btn-green btn large fade-in">Start Quiz</div>
+                        </div>
+                        <div className={(this.props.instructions === false && newQuiz === false) ? "question-details" : "hidden"}>
+                            <h3>Current Question:</h3>
+                            <h3 className="question">{this.props.question}</h3>
+                            <ul className="option-list"> 
+                                <li value="1" id="1" onClick={() => this.submitAnswer("1")}>{options[0]}</li>
+                                <li value="2" id="2" onClick={() => this.submitAnswer("2")}>{options[1]}</li>                
+                                <li value="3" id="3" onClick={() => this.submitAnswer("3")}>{options[2]}</li>
+                            </ul>
+                            <h2>Answered {this.props.correctCount} out of {this.props.questionCount}.</h2>
+                            <div>
+                                <ToastContainer ref="container" toastMessageFactory={ToastMessageFactory}  />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-                
             <div className="footer">
                 <div className="logout">
                     <a href="/api/auth/logout" className="btn btn-black">Log Out</a>

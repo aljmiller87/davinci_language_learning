@@ -8,15 +8,16 @@ export default function LoginPage() {
 		        <div className="dark circle"></div>
 		        <h1>DaVinci Language Learning</h1>
 		    </div>
-		    <div className="main"></div>
-		    <div className="content-container">
-		    	<div className="login-container">
-			    	<div className="login-wrapper">
-			    		<h1 className="login"> Welcome!</h1>
-			    		<h3>Please log in with Google.</h3>
-			    		<a href="/api/auth/google" className="btn-green btn button">Log In</a>
-			    	</div>
-			    </div>
+		    <div className="main">
+			    <div className="content-container">
+			    	<div className="login-container">
+				    	<div className="login-wrapper">
+				    		<h1 className="login"> Welcome!</h1>
+				    		<h3>Please log in with Google.</h3>
+				    		<a href="/api/auth/google" className="btn-green btn button">Log In</a>
+				    	</div>
+				    </div>
+				</div>
 			</div>
 		    <div className="footer lgn">
 		        <div className="register">
