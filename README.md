@@ -1,58 +1,18 @@
-# Thinkful Full Stack Template
+# Davinci Language Learning
 
-A template for developing and deploying full stack JavaScript apps.
+##What is it?
+A full stack language learning app that uses custom ‘spaced repetition’ algorithm to help students learn a new language. Uses Passport and Google OAuth authentication. All data manipulation is handled by backend. Built with React, Node, Express, and Mongo.
 
-## Getting started
+##How to use:
+Select a language:
+To get started, click the 'Select Language' tab above. Choose from the available languages on the dropdown.
 
-### Setting up a project
+How to Use: 
+Once you select the language to study, the first question will automatically load on your screen. You will be presented with a word or phrase in English and asked to select the correct translation out of three possible options given. To select an answer, simply click directly on top of the choice. There will be a green highlighter that appears when you hover over any option.
+Upon submitting an anwer, you will be given immediate feedback via notification if answer was correct. All progress is automatically saved. To continue progress upon return, simply select the same language lesson and your current progress will appear.
 
-* Move into your projects directory: `cd ~/YOUR_PROJECTS_DIRECTORY`
-* Clone this repository: `git clone https://github.com/Thinkful-Ed/full-stack-template YOUR_PROJECT_NAME`
-* Move into the project directory: `cd YOUR_PROJECT_NAME`
-* Install the dependencies: `npm install`
-* Create a new repo on GitHub: https://github.com/new
-    * Make sure the "Initialize this repository with a README" option is left **un**checked
-* Update the remote to point to your GitHub repository: `git remote set-url origin https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME`
+Spaced Repetition:
+The Davinci Language Learning strategy follows a 'spaced repetition' algorithm. This means the more you correctly answer an individual question, the greater period of time before that question is revisited. However, if an anwer given is incorrect, that question will be revisited in a shorter time than before.
 
-### Working on the project
-
-* Move into the project directory: `cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME`
-* Run the development task: `npm run dev`
-    * Starts a server running at http://localhost:8080
-    * Automatically rebuilds when any of your files change
-
-## Proxying
-
-In development, the full stack template works by proxying requests from port 8080 to the server or the client.  Any requests to routes which start with `/api/`, (for example, `/api/foo`, or `/api/foo/bar`) will be sent to the server.  All other requests, will serve the client.
-
-*tl;dr* Make sure your API endpoints start with `/api`.
-
-## Installing dependencies
-
-Client-side dependencies should be installed into the `client` directory:
-
-```
-cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME/client
-npm install --save dependency-name
-```
-
-Server-side dependencies should be installed into the `server` directory:
-
-```
-cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME/server
-npm install --save dependency-name
-```
-
-## Deployment
-
-Requires the [Heroku CLI client](https://devcenter.heroku.com/articles/heroku-command-line).
-
-### Setting up the project on Heroku
-
-* Move into the project directory: `cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME`
-* Create the Heroku app: `heroku create PROJECT_NAME`
-
-### Deploying to Heroku
-
-* Push your code to Heroku: `git push heroku master`
-
+Levels:
+After sufficient proficiency has been achieved, you will be given a notification that you will 'level up'. Leveling up means that new and more difficult questions are added to your study.

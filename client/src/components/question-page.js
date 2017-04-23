@@ -134,13 +134,20 @@ export class QuestionPage extends React.Component {
                             </ul>
                         </div>
                         <div className={this.props.instructions === true ? "instructions" : "hidden"}>
-                            <h3>Instructions</h3>
-                            <p>To get started, hover over the 'Select Language' tab above. Choose from the available languages on the dropdown.</p>
+                            <h3 className="bold">Select a language:</h3>
+                            <p>To get started, click the 'Select Language' tab above. Choose from the available languages on the dropdown.</p>
+                            <h3 className="bold">How to Use: </h3>
                             <p>Once you select the language to study, the first question will automatically load on your screen. You will be presented with a word or phrase in English and asked to select the correct translation out of three possible options given. To select an answer, simply click directly on top of the choice. There will be a green highlighter that appears when you hover over any option.</p>
-                            <p>All progress is automatically saved. To continue progress upon return, simply select the same language lesson and your current progress will appear.</p>
+                            <p>Upon submitting an anwer, you will be given immediate feedback via notification if answer was correct. All progress is automatically saved. To continue progress upon return, simply select the same language lesson and your current progress will appear.</p>
+                            <h3 className="bold">Spaced Repetition:</h3>
+                            <p>The Davinci Language Learning strategy follows a 'spaced repetition' algorithm. This means the more you correctly answer an individual question, the greater period of time before that question is revisited. However, if an anwer given is incorrect, that question will be revisited in a shorter time than before.</p>
+                            <h3 className="bold">Levels:</h3>
+                            <p>After sufficient proficiency has been achieved, you will be given a notification that you will 'level up'. Leveling up means that new and more difficult questions are added to your study.</p>
+                            
+
                         </div>
                         <div className={(this.props.instructions === false && newQuiz === true) ? "question-details" : "hidden"}>
-                            <div onClick={this.firstQuestion} className="btn-green btn large fade-in">Start Quiz</div>
+                            <div onClick={this.firstQuestion} className="btn-green btn large fade-in button">Start Quiz</div>
                         </div>
                         <div className={(this.props.instructions === false && newQuiz === false) ? "question-details" : "hidden"}>
                             <h3>Current Question:</h3>

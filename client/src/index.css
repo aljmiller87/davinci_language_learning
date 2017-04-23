@@ -358,10 +358,6 @@ li.dropdown {
 }
 
 @media only screen and (min-width: 500px) {
-	.instructions {
-		overflow: initial;
-	}
-
 	.login-container {
 		margin-top: 0px;
 	}
@@ -386,6 +382,14 @@ li.dropdown {
 		width: 60%;
 		height: 60%;
 		margin-top: 190px
+	}
+
+	.instructions {
+		height: 77%;
+	}
+
+	.instructions p {
+		text-align: left;
 	}
 
 	.question-container {
@@ -415,14 +419,6 @@ li.dropdown {
 		margin-top: 160px;
 	}
 
-	.question-container {
-
-	}
-
-/*	li a, .dropbtn {
-	    padding: 14px 16px;
-	}*/
-
 	.dropdown-content {
 	    min-width: 160px;
 	}
@@ -430,11 +426,11 @@ li.dropdown {
 	.instructions {
 		padding: 15px;
 		font-size: 90%;
-		overflow: initial;
+		height: 85%;
 	}
 
 	.option-list li{
-		width: 30%;
+		width: 60%;
 	}
 
 	.option-list li:hover {
